@@ -8,7 +8,7 @@ import { NavBar } from "./NavBar";
 import { GoogleSignInButton } from "./GoogleSignIn";
 import Hero from "@/components/tag-input-demo";
 import TagForm from "@/components/tag-input-demo";
-import TetrisLoader from "@/components/loader";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 const supabaseUrl: string = process.env.NEXT_PUBLIC_SUPABASE_URL!;
 const supabaseKey: string = process.env.NEXT_PUBLIC_SUPABASE_ANON_KEY!;
@@ -76,12 +76,10 @@ export default function Home() {
         <NewsletterView data={data} />
       ) : // If data is not available, check the loading state
       loading ? (
-        // Render loading spinner if loading is true
         <div className="flex-grow flex justify-center items-center">
           <l-helix size="100" speed="2.5" color="black"></l-helix>
         </div>
       ) : (
-        // Render TagForm if loading is false
         <TagForm tags={tags} setTags={setTags} onGetNewsletter={onSubmit} />
       )}
     </div>
@@ -92,22 +90,62 @@ const NewsletterView = ({ data }) => {
   return (
     <div className="flex-grow flex flex-col items-center mt-5 space-y-5">
       <h1 className="text-4xl font-bold">Derek's Newsletter</h1>
-      <h2 className="text-2xl font-semibold text-left">Articles</h2>
 
-      <div className="w-1/2">
-        {data.articles.map((article: any) => {
-          return (
-            <CustomCard
-              key={article.id}
-              title={article.title}
-              description={article.description}
-              link={article.metadata.source}
-              tags={article.metadata.tags}
-              date={article.metadata.date}
-            />
-          );
-        })}
-      </div>
+      <Tabs defaultValue="articles" className="items-center justify-center w-1/2">
+        <TabsList>
+          <TabsTrigger value="articles">News Articles</TabsTrigger>
+          <TabsTrigger value="research">Research Papers</TabsTrigger>
+          <TabsTrigger value="github">GitHub Repos</TabsTrigger>
+        </TabsList>
+        <TabsContent value="articles">
+          <div className="">
+            {data.articles.map((article: any) => {
+              return (
+                <CustomCard
+                  key={article.id}
+                  title={article.title}
+                  description={article.description}
+                  link={article.metadata.source}
+                  tags={article.metadata.tags}
+                  date={article.metadata.date}
+                />
+              );
+            })}
+          </div>
+        </TabsContent>
+        <TabsContent value="research">
+          <div className="">
+            {data.articles.map((article: any) => {
+              return (
+                <CustomCard
+                  key={article.id}
+                  title={article.title}
+                  description={article.description}
+                  link={article.metadata.source}
+                  tags={article.metadata.tags}
+                  date={article.metadata.date}
+                />
+              );
+            })}
+          </div>
+        </TabsContent>
+        <TabsContent value="github">
+          <div className="">
+            {data.articles.map((article: any) => {
+              return (
+                <CustomCard
+                  key={article.id}
+                  title={article.title}
+                  description={article.description}
+                  link={article.metadata.source}
+                  tags={article.metadata.tags}
+                  date={article.metadata.date}
+                />
+              );
+            })}
+          </div>
+        </TabsContent>
+      </Tabs>
     </div>
   );
 };

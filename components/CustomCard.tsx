@@ -35,7 +35,7 @@ export function CustomCard({ title, description, link, date, tags }) {
   }
 
   return (
-    <Card>
+    <Card className="hover:scale-105 transition-transform duration-500">
       <CardHeader className="grid grid-cols-[1fr_110px] items-start gap-4 space-y-0 mr-3">
         <div className="space-y-1">
           <CardTitle>{title}</CardTitle>
