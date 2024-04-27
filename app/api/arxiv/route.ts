@@ -4,14 +4,11 @@ export async function GET() {
     const papers = await arxiv.search({
       searchQueryParams: [
         {
-          include: [{ name: "RNN" }, { name: "Deep learning" }],
-          exclude: [{ name: "LSTM" }],
-        },
-        {
-          include: [{ name: "GAN" }],
+          include: [{ name: "a" }, ],
         },
       ],
       start: 0,
+      sortBy: "lastUpdatedDate",
       maxResults: 10,
     });
 
