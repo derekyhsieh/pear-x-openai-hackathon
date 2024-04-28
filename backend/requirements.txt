@@ -1,0 +1,8 @@
+openai
+langchain-openai
+langchain
+pinecone-client
+fastapi
+uvicorn
+starlette
+python-dotenv
