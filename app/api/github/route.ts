@@ -1,5 +1,5 @@
-export async function GET() {
-  const perPage = 40;
+ export async function GET_GITHUB() {
+  const perPage = 300;
   try {
     const response = await fetch(
       `https://api.github.com/search/repositories?q=created:>2023-01-01&sort=stars&order=desc&per_page=${perPage}`,
@@ -19,7 +19,6 @@ export async function GET() {
 
     const repoDataPromises = data.items.map(async (item: any) => {
       const readmeContent = await fetchReadme(item.full_name);
-      console.log("README CONTENT", readmeContent)
       return {
         name: item.name,
         description: item.description,
@@ -32,9 +31,7 @@ export async function GET() {
 
     const repoData = await Promise.all(repoDataPromises);
 
-    console.log(repoData);
-
-    return Response.json({ trendingRepos: repoData });
+    return { trendingRepos: repoData };
   } catch (error) {
     console.log("ERROR", error);
   }
